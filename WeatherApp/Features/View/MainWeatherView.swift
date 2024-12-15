@@ -13,6 +13,7 @@ struct MainWeatherView: View {
     
     @State private var pins: [MapPinData] = [] // Holds weather pins
     @State private var showMap = false // Controls the map sheet display
+    @State private var showHistoricalWeather = false // Controls the historical weather sheet
     
     var body: some View {
         ZStack {
@@ -48,21 +49,25 @@ struct MainWeatherView: View {
                         ProgressView("Loading Daily Forecast...")
                             .foregroundColor(.white)
                     }
+                    
+                    // Buttons for Advanced Features
+                    HStack(spacing: 20) {
+                        Button("View Map") {
+                            showMap = true
+                        }
+                        .buttonStyle(.borderedProminent)
+                        
+                        Button("View Historical Weather") {
+                            showHistoricalWeather = true
+                        }
+                        .buttonStyle(.borderedProminent)
+                    }
                 }
-                .padding()
-            }
-            
-            // View Map Button
-            VStack {
-                Spacer()
-                Button("View Map") {
-                    showMap = true
-                }
-                .buttonStyle(.borderedProminent)
                 .padding()
             }
         }
         .onAppear {
+            // Fetch data when view appears
             viewModel.fetchWeatherData(for: "Montreal")
             hourlyViewModel.fetchHourlyForecast(for: "Montreal")
             dailyViewModel.fetchDailyForecast(lat: 45.5088, lon: -73.5878)
@@ -70,14 +75,18 @@ struct MainWeatherView: View {
         .sheet(isPresented: $showMap) {
             WeatherMapView(pins: $pins, fetchWeather: fetchWeatherData)
         }
+        .sheet(isPresented: $showHistoricalWeather) {
+            HistoricalWeatherView()
+        }
     }
     
+    // Simulate fetching weather data for a location
     private func fetchWeatherData(for coordinate: CLLocationCoordinate2D) {
         let randomTemp = String(format: "%.1f", Double.random(in: -10...30))
-        let randomMinTemp = String(format: "%.1f", Double.random(in: -15...randomTemp.toDouble()))
-        let randomMaxTemp = String(format: "%.1f", Double.random(in: randomTemp.toDouble()...35))
-        let randomWindSpeed = String(format: "%.1f", Double.random(in: 0...15)) + " m/s"
-        let randomHumidity = String(Int.random(in: 30...90)) + "%"
+        let randomMinTemp = String(format: "%.1f", Double.random(in: -20...10))
+        let randomMaxTemp = String(format: "%.1f", Double.random(in: 10...30))
+        let randomWindSpeed = String(format: "%.1f", Double.random(in: 1...15))
+        let randomHumidity = "\(Int.random(in: 40...90))%"
         
         let newPin = MapPinData(
             coordinate: coordinate,
@@ -89,7 +98,6 @@ struct MainWeatherView: View {
         )
         pins.append(newPin)
     }
-
     
     // Background gradient based on weather condition
     private func backgroundGradient(for condition: String?) -> some View {
