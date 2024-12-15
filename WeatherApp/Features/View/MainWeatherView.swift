@@ -30,8 +30,11 @@ struct MainWeatherView: View {
                             temperature: String(format: "%.1f°C", weather.main.temp),
                             condition: weather.weather.first?.description.capitalized ?? "",
                             location: weather.name,
-                            iconURL: viewModel.iconURL
+                            iconURL: viewModel.iconURL,
+                            humidity: String(weather.main.humidity),    // Add humidity
+                            windSpeed: String(weather.wind.speed)       // Add wind speed
                         )
+
                     } else {
                         ProgressView("Loading Current Weather...")
                             .foregroundColor(.white)

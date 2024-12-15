@@ -12,6 +12,8 @@ struct CurrentWeatherView: View {
     var condition: String
     var location: String
     var iconURL: String?
+    var humidity: String? = nil
+    var windSpeed: String? = nil
 
     var body: some View {
         VStack(spacing: 16) { // Add spacing for better alignment
@@ -37,9 +39,36 @@ struct CurrentWeatherView: View {
             Text(temperature)
                 .font(.system(size: 64, weight: .bold))
                 .foregroundColor(.white)
+
             Text(condition)
                 .font(.title2)
                 .foregroundColor(.white)
+
+            // Updated weather details: Humidity and Wind Speed
+            if let humidity = humidity, let windSpeed = windSpeed {
+                HStack(spacing: 40) { // Adjust spacing
+                    VStack {
+                        Text("Humidity")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        Text("\(humidity)%")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+
+                    VStack {
+                        Text("Wind")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                        Text("\(windSpeed) km/h")
+                            .font(.title3)
+                            .fontWeight(.bold)
+                            .foregroundColor(.white)
+                    }
+                }
+                .padding(.top, 8) // Add padding for better alignment
+            }
         }
     }
 }
