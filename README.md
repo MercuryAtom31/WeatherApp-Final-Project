@@ -50,43 +50,62 @@
 
 ## Folder Structure
 ```
-WeatherApp
-├── Features
-│   ├── Model
+WeatherApp/
+├── Features/
+│   ├── Model/
 │   │   ├── DailyWeather.swift
 │   │   ├── Forecast.swift
+│   │   ├── ForecastResponse.swift
 │   │   ├── HistoricalWeather.swift
+│   │   ├── HourlyWeather.swift
 │   │   ├── Location.swift
+│   │   ├── MapPinData.swift
+│   │   ├── OpenMeteoModels.swift
 │   │   ├── Weather.swift
 │   │   └── WeatherNews.swift
-│   ├── View
-│   │   ├── CurrentWeatherView.swift
-│   │   ├── DailyForecastView.swift
-│   │   ├── HourlyForecastView.swift
-│   │   ├── MapViewRepresentable.swift
-│   │   ├── WeatherMapView.swift
-│   │   ├── WeatherNewsView.swift
-│   │   └── MainWeatherView.swift
-│   ├── ViewModel
+│   │
+│   ├── ViewModel/
 │   │   ├── DailyForecastViewModel.swift
+│   │   ├── HistoricalWeatherViewModel.swift
 │   │   ├── HourlyForecastViewModel.swift
+│   │   ├── WeatherNewsViewModel.swift
 │   │   ├── WeatherViewModel.swift
-│   │   └── WeatherNewsViewModel.swift
+│   │   └── WeeklyForecastViewModel.swift
+│   │
+│   └── View/
+│       ├── CurrentWeatherView.swift
+│       ├── DailyForecastView.swift
+│       ├── HistoricalWeatherView.swift
+│       ├── HourlyForecastView.swift
+│       ├── MainWeatherView.swift
+│       ├── MapViewRepresentable.swift
+│       ├── WeatherBackground.swift
+│       ├── WeatherDetailsView.swift
+│       ├── WeatherMapView.swift
+│       ├── WeatherNewsView.swift
+│       └── WeeklyForecastView.swift
 │
-├── Resources
+├── Resources/
 │   ├── local_weather.json
 │   ├── news_articles.json
+│   └── Assets.xcassets
 │
-├── Services
+├── Services/
 │   ├── LocationManager.swift
 │   ├── OpenMeteoService.swift
 │   └── WeatherService.swift
 │
-├── Assets
+├── App/
+│   ├── WeatherAppApp.swift
 │   ├── ContentView.swift
 │   └── StringExtensions.swift
 │
-└── WeatherAppApp.swift
+├── Tests/
+│   ├── WeatherAppTests/
+│   └── WeatherAppUITests/
+│
+└── Preview Content/
+    └── Preview Assets/
 ```
 
 ---
