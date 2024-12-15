@@ -6,38 +6,45 @@
 //
 
 import SwiftUI
-import CoreLocation
 
 struct WeatherDetailsView: View {
     let pin: MapPinData
-    
+
     var body: some View {
-        VStack(spacing: 10) {
+        VStack(spacing: 8) {
             Text("Weather Details")
                 .font(.headline)
-                .bold()
+                .padding(.bottom, 5)
+
             HStack {
-                VStack {
-                    Text("Temp")
-                        .font(.subheadline)
-                    Text("\(pin.temperature)°C")
-                        .font(.title2)
-                        .bold()
-                }
+                WeatherDetailItem(label: "Min Temp", value: "\(pin.minTemp)°C")
                 Spacer()
-                VStack {
-                    Text("Latitude")
-                        .font(.subheadline)
-                    Text(String(format: "%.2f", pin.coordinate.latitude))
-                }
+                WeatherDetailItem(label: "Max Temp", value: "\(pin.maxTemp)°C")
+            }
+
+            HStack {
+                WeatherDetailItem(label: "Wind Speed", value: pin.windSpeed)
                 Spacer()
-                VStack {
-                    Text("Longitude")
-                        .font(.subheadline)
-                    Text(String(format: "%.2f", pin.coordinate.longitude))
-                }
+                WeatherDetailItem(label: "Humidity", value: pin.humidity)
             }
         }
         .padding()
+        .frame(maxWidth: .infinity)
+    }
+}
+
+struct WeatherDetailItem: View {
+    let label: String
+    let value: String
+
+    var body: some View {
+        VStack {
+            Text(label)
+                .font(.caption)
+                .foregroundColor(.gray)
+            Text(value)
+                .font(.headline)
+                .foregroundColor(.black)
+        }
     }
 }

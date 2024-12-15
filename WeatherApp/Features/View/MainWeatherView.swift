@@ -72,12 +72,24 @@ struct MainWeatherView: View {
         }
     }
     
-    // Simulate fetching weather data for a location
     private func fetchWeatherData(for coordinate: CLLocationCoordinate2D) {
         let randomTemp = String(format: "%.1f", Double.random(in: -10...30))
-        let newPin = MapPinData(coordinate: coordinate, temperature: randomTemp)
+        let randomMinTemp = String(format: "%.1f", Double.random(in: -15...randomTemp.toDouble()))
+        let randomMaxTemp = String(format: "%.1f", Double.random(in: randomTemp.toDouble()...35))
+        let randomWindSpeed = String(format: "%.1f", Double.random(in: 0...15)) + " m/s"
+        let randomHumidity = String(Int.random(in: 30...90)) + "%"
+        
+        let newPin = MapPinData(
+            coordinate: coordinate,
+            temperature: randomTemp,
+            minTemp: randomMinTemp,
+            maxTemp: randomMaxTemp,
+            windSpeed: randomWindSpeed,
+            humidity: randomHumidity
+        )
         pins.append(newPin)
     }
+
     
     // Background gradient based on weather condition
     private func backgroundGradient(for condition: String?) -> some View {
