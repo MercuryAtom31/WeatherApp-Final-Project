@@ -4,18 +4,23 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct MainWeatherView: View {
     @StateObject private var viewModel = WeatherViewModel()
     @StateObject private var hourlyViewModel = HourlyForecastViewModel()
     @StateObject private var dailyViewModel = DailyForecastViewModel()
+    
+    @State private var pins: [MapPinData] = [] // Holds weather pins
     @State private var showMap = false // Controls the map sheet display
-
+    
     var body: some View {
         ZStack {
+            // Background gradient
             backgroundGradient(for: viewModel.currentWeather?.weather.first?.description)
                 .edgesIgnoringSafeArea(.all)
-
+            
+            // Main content
             ScrollView {
                 VStack(spacing: 20) {
                     // Current Weather Section
@@ -30,12 +35,12 @@ struct MainWeatherView: View {
                         ProgressView("Loading Current Weather...")
                             .foregroundColor(.white)
                     }
-
+                    
                     // Hourly Forecast Section
                     if !hourlyViewModel.hourlyForecast.isEmpty {
                         HourlyForecastView(hourlyForecast: hourlyViewModel.hourlyForecast)
                     }
-
+                    
                     // Daily Forecast Section
                     if !dailyViewModel.dailyForecasts.isEmpty {
                         DailyForecastView(dailyForecasts: dailyViewModel.dailyForecasts)
@@ -43,34 +48,38 @@ struct MainWeatherView: View {
                         ProgressView("Loading Daily Forecast...")
                             .foregroundColor(.white)
                     }
-
-                    // View Map Button
-                    Button(action: {
-                        showMap = true
-                    }) {
-                        Text("View Map")
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .frame(maxWidth: .infinity)
-                            .background(Color.blue)
-                            .cornerRadius(10)
-                            .padding(.horizontal)
-                    }
                 }
                 .padding()
             }
-        }
-        .sheet(isPresented: $showMap) {
-            WeatherMapView(locationName: viewModel.currentWeather?.name ?? "Unknown")
+            
+            // View Map Button
+            VStack {
+                Spacer()
+                Button("View Map") {
+                    showMap = true
+                }
+                .buttonStyle(.borderedProminent)
+                .padding()
+            }
         }
         .onAppear {
             viewModel.fetchWeatherData(for: "Montreal")
             hourlyViewModel.fetchHourlyForecast(for: "Montreal")
             dailyViewModel.fetchDailyForecast(lat: 45.5088, lon: -73.5878)
         }
+        .sheet(isPresented: $showMap) {
+            WeatherMapView(pins: $pins, fetchWeather: fetchWeatherData)
+        }
     }
-
+    
+    // Simulate fetching weather data for a location
+    private func fetchWeatherData(for coordinate: CLLocationCoordinate2D) {
+        let randomTemp = String(format: "%.1f", Double.random(in: -10...30))
+        let newPin = MapPinData(coordinate: coordinate, temperature: randomTemp)
+        pins.append(newPin)
+    }
+    
+    // Background gradient based on weather condition
     private func backgroundGradient(for condition: String?) -> some View {
         let colors: [Color]
         switch condition?.lowercased() {
