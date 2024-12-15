@@ -7,21 +7,21 @@ import SwiftUI
 import MapKit
 
 struct MainWeatherView: View {
+    // Step 2: Add the missing @StateObject and @State variables here
     @StateObject private var viewModel = WeatherViewModel()
     @StateObject private var hourlyViewModel = HourlyForecastViewModel()
     @StateObject private var dailyViewModel = DailyForecastViewModel()
-    
-    @State private var pins: [MapPinData] = [] // Holds weather pins
-    @State private var showMap = false // Controls the map sheet display
-    @State private var showHistoricalWeather = false // Controls the historical weather sheet
-    
+    @StateObject private var newsViewModel = WeatherNewsViewModel()
+
+    @State private var showMap = false
+    @State private var showHistoricalWeather = false
+    @State private var pins: [MapPinData] = []
+
     var body: some View {
         ZStack {
-            // Background gradient
             backgroundGradient(for: viewModel.currentWeather?.weather.first?.description)
                 .edgesIgnoringSafeArea(.all)
-            
-            // Main content
+
             ScrollView {
                 VStack(spacing: 20) {
                     // Current Weather Section
@@ -31,46 +31,44 @@ struct MainWeatherView: View {
                             condition: weather.weather.first?.description.capitalized ?? "",
                             location: weather.name,
                             iconURL: viewModel.iconURL,
-                            humidity: String(weather.main.humidity),    // Add humidity
-                            windSpeed: String(weather.wind.speed)       // Add wind speed
+                            humidity: String(weather.main.humidity),
+                            windSpeed: String(format: "%.2f km/h", weather.wind.speed)
                         )
-
                     } else {
                         ProgressView("Loading Current Weather...")
-                            .foregroundColor(.white)
                     }
-                    
-                    // Hourly Forecast Section
+
+                    // Hourly Forecast
                     if !hourlyViewModel.hourlyForecast.isEmpty {
                         HourlyForecastView(hourlyForecast: hourlyViewModel.hourlyForecast)
                     }
-                    
-                    // Daily Forecast Section
+
+                    // Daily Forecast
                     if !dailyViewModel.dailyForecasts.isEmpty {
                         DailyForecastView(dailyForecasts: dailyViewModel.dailyForecasts)
-                    } else {
-                        ProgressView("Loading Daily Forecast...")
-                            .foregroundColor(.white)
                     }
-                    
-                    // Buttons for Advanced Features
+
+                    // Weather News Section
+                    WeatherNewsView(articles: newsViewModel.newsArticles)
+
+                    // Buttons Section
                     HStack(spacing: 20) {
                         Button("View Map") {
                             showMap = true
                         }
                         .buttonStyle(.borderedProminent)
-                        
+
                         Button("View Historical Weather") {
                             showHistoricalWeather = true
                         }
                         .buttonStyle(.borderedProminent)
                     }
+                    .padding(.bottom)
                 }
                 .padding()
             }
         }
         .onAppear {
-            // Fetch data when view appears
             viewModel.fetchWeatherData(for: "Montreal")
             hourlyViewModel.fetchHourlyForecast(for: "Montreal")
             dailyViewModel.fetchDailyForecast(lat: 45.5088, lon: -73.5878)
@@ -82,27 +80,30 @@ struct MainWeatherView: View {
             HistoricalWeatherView()
         }
     }
-    
-    // Simulate fetching weather data for a location
+
     private func fetchWeatherData(for coordinate: CLLocationCoordinate2D) {
+        // Generate random placeholder values for missing parameters
         let randomTemp = String(format: "%.1f", Double.random(in: -10...30))
-        let randomMinTemp = String(format: "%.1f", Double.random(in: -20...10))
-        let randomMaxTemp = String(format: "%.1f", Double.random(in: 10...30))
-        let randomWindSpeed = String(format: "%.1f", Double.random(in: 1...15))
-        let randomHumidity = "\(Int.random(in: 40...90))%"
+        let tempValue = randomTemp.toDouble() // Safely convert the randomTemp to Double
         
+        let randomMinTemp = String(format: "%.1f", Double.random(in: -15...(tempValue - 1)))
+        let randomMaxTemp = String(format: "%.1f", Double.random(in: (tempValue + 1)...35))
+        let randomWindSpeed = String(format: "%.2f", Double.random(in: 0...20))
+        let randomHumidity = Int.random(in: 30...90)
+
+        // Create a new MapPinData instance with all required arguments
         let newPin = MapPinData(
             coordinate: coordinate,
             temperature: randomTemp,
             minTemp: randomMinTemp,
             maxTemp: randomMaxTemp,
             windSpeed: randomWindSpeed,
-            humidity: randomHumidity
+            humidity: "\(randomHumidity)%"
         )
+        
         pins.append(newPin)
     }
-    
-    // Background gradient based on weather condition
+
     private func backgroundGradient(for condition: String?) -> some View {
         let colors: [Color]
         switch condition?.lowercased() {
