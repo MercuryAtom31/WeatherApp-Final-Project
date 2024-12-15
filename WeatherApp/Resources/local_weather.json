@@ -1,0 +1,65 @@
+{
+  "location": {
+    "city": "San Francisco",
+    "latitude": 37.7749,
+    "longitude": -122.4194
+  },
+  "historical_weather": [
+    {
+      "date": "2024-12-01",
+      "temperature": {
+        "high": 18,
+        "low": 10
+      },
+      "condition": "Rainy",
+      "humidity": 78,
+      "wind_speed": 12,
+      "precipitation": 5.2
+    },
+    {
+      "date": "2024-12-02",
+      "temperature": {
+        "high": 20,
+        "low": 12
+      },
+      "condition": "Cloudy",
+      "humidity": 65,
+      "wind_speed": 8,
+      "precipitation": 0
+    },
+    {
+      "date": "2024-12-03",
+      "temperature": {
+        "high": 22,
+        "low": 13
+      },
+      "condition": "Sunny",
+      "humidity": 50,
+      "wind_speed": 5,
+      "precipitation": 0
+    },
+    {
+      "date": "2024-12-04",
+      "temperature": {
+        "high": 19,
+        "low": 11
+      },
+      "condition": "Windy",
+      "humidity": 60,
+      "wind_speed": 20,
+      "precipitation": 0
+    },
+    {
+      "date": "2024-12-05",
+      "temperature": {
+        "high": 17,
+        "low": 9
+      },
+      "condition": "Rainy",
+      "humidity": 85,
+      "wind_speed": 10,
+      "precipitation": 4.5
+    }
+  ]
+}
+
