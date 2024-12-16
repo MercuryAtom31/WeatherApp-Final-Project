@@ -119,7 +119,7 @@ WeatherApp/
 ### Steps to Run
 1. Clone this repository to your local system:
    ```bash
-   git clone https://github.com/yourusername/WeatherApp.git
+   git clone https://github.com/yourusername/WeatherApp.git](https://github.com/MercuryAtom31/WeatherApp-Final-Project.git
    ```
 2. Open the project in Xcode:
    ```bash
@@ -163,13 +163,24 @@ WeatherApp/
 
 ## Screenshots
 ### Current Weather
-![Current Weather](screenshot_current_weather.png)
+![Screenshot 2024-12-15 at 22 42 43](https://github.com/user-attachments/assets/0cc6bb40-2e13-421d-8f0b-715f1611749e)
 
-### Daily Forecast
-![Daily Forecast](screenshot_daily_forecast.png)
+### Historical Weather
+![Screenshot 2024-12-15 at 22 42 16](https://github.com/user-attachments/assets/c16826bd-0b62-45ec-84a4-83254b82e615)
+
+### Historical Weather Sorting by keyword
+![Screenshot 2024-12-15 at 22 42 16](https://github.com/user-attachments/assets/8eefbc0f-a6a6-4e7d-85f8-00a1ad29ffb1)
 
 ### Weather News
-![Weather News](screenshot_weather_news.png)
+![Screenshot 2024-12-15 at 22 43 01](https://github.com/user-attachments/assets/94f0cf47-30ce-4367-88d7-98be20182a02)
+
+
+### When you click on one of the weather news article
+![Screenshot 2024-12-15 at 22 43 10](https://github.com/user-attachments/assets/7b123189-d57c-43a8-b21f-80fa03303f71)
+
+### When you pin a specific city to get its current weather conditions
+![Screenshot 2024-12-15 at 22 43 29](https://github.com/user-attachments/assets/b4b2fca3-f7dd-41c0-9ca7-610dc4de05b3)
+
 
 ---
 
