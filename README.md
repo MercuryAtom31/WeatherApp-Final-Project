@@ -217,6 +217,9 @@ Make sure to replace `YOUR_API_KEY` with a valid API key for OpenWeather API.
 ### When you pin a specific city to get its current weather conditions
 ![Screenshot 2024-12-15 at 22 43 29](https://github.com/user-attachments/assets/b4b2fca3-f7dd-41c0-9ca7-610dc4de05b3)
 
+![Screenshot 2024-12-15 at 21 05 25](https://github.com/user-attachments/assets/0607dd85-f8c8-429d-815d-bc8690eb5923)
+
+![Screenshot 2024-12-15 at 21 05 34](https://github.com/user-attachments/assets/eff41f5e-8f9e-4d47-bc26-7e5d09749b00)
 
 ---
 
