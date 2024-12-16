@@ -154,8 +154,44 @@ WeatherApp/
 
 ---
 
+## APIs Used in WeatherApp
+
+### 1. OpenWeather API
+- **Base URL**: `https://api.openweathermap.org/data/2.5/`
+- **Endpoints**:
+  - **Current Weather**: Fetches real-time weather data for a city.  
+    Example:  
+    ```
+    https://api.openweathermap.org/data/2.5/weather?q=Montreal&appid=YOUR_API_KEY&units=metric
+    ```
+  - **Hourly Forecast**: Retrieves hourly weather data.  
+    Example:  
+    ```
+    https://api.openweathermap.org/data/2.5/forecast?q=Montreal&appid=YOUR_API_KEY&units=metric
+    ```
+  - **Daily Forecast**: (Optional) Provides 7-day forecasts.  
+    Example:  
+    ```
+    https://api.openweathermap.org/data/2.5/forecast/daily?q=Montreal&cnt=7&appid=YOUR_API_KEY&units=metric
+    ```
+
+### 2. Open-Meteo API
+- **Base URL**: `https://api.open-meteo.com/v1/forecast`
+- **Endpoint**:
+  - **Daily Weather Data**: Fetches daily high/low temperatures and weather codes.  
+    Example:  
+    ```
+    https://api.open-meteo.com/v1/forecast?latitude=45.5088&longitude=-73.5878&daily=temperature_2m_max,temperature_2m_min,weathercode&timezone=America%2FToronto
+    ```
+
+These APIs power the app's real-time weather updates, hourly forecasts, and daily forecasts, enabling a rich user experience.  
+Make sure to replace `YOUR_API_KEY` with a valid API key for OpenWeather API.
+
+---
+
 ## Acknowledgments
 - [Open-Meteo API](https://open-meteo.com/)
+- OpenWeather API
 - [WeatherBug News](https://www.weatherbug.com/)
 - Built with ❤️ using SwiftUI and MapKit.
 
