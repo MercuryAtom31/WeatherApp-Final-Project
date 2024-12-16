@@ -7,13 +7,16 @@
 
 import SwiftUI
 
+/// A SwiftUI view for displaying and managing historical weather data with filtering and sorting options.
 struct HistoricalWeatherView: View {
+    
+    /// The view model that manages historical weather data and handles filtering and sorting.
     @StateObject private var viewModel = HistoricalWeatherViewModel()
     
     var body: some View {
         NavigationView {
             VStack {
-                // Filtering Input
+                /// Filtering Input
                 TextField("Filter by Condition (e.g., Rainy, Sunny)", text: $viewModel.filterCondition)
                     .textFieldStyle(RoundedBorderTextFieldStyle())
                     .padding()
@@ -21,7 +24,7 @@ struct HistoricalWeatherView: View {
                         viewModel.applyFilterAndSort()
                     }
                 
-                // Sorting Picker
+                /// Sorting Picker
                 Picker("Sort by", selection: $viewModel.sortOption) {
                     Text("Date").tag(HistoricalWeatherViewModel.SortOption.date)
                     Text("High Temp").tag(HistoricalWeatherViewModel.SortOption.temperatureHigh)
@@ -35,7 +38,7 @@ struct HistoricalWeatherView: View {
                     viewModel.applyFilterAndSort()
                 }
                 
-                // List Display
+                /// List Display
                 List(viewModel.filteredData) { weather in
                     VStack(alignment: .leading) {
                         Text("Date: \(weather.date)")

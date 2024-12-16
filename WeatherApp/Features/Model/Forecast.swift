@@ -11,5 +11,6 @@ struct Forecast: Codable {
     let date: String
     let highTemperature: Double
     let lowTemperature: Double
+    /// A short description of the weather condition (e.g., "Sunny", "Cloudy").
     let condition: String
 }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A model representing a weather-related news article.
 struct WeatherNews: Identifiable, Codable {
     let id = UUID()
     let title: String

@@ -7,18 +7,26 @@
 
 import SwiftUI
 
+/// A view that provides a dynamic background based on the weather condition.
 struct WeatherBackground: View {
+    
+    /// The weather condition used to determine the background colors.
     let condition: String
     
     var body: some View {
+        
+        /// Create a vertical gradient based on the weather condition.
         LinearGradient(
             gradient: Gradient(colors: backgroundColors(for: condition)),
-            startPoint: .top,
-            endPoint: .bottom
+            startPoint: .top,/// Start the gradient at the top./
+            endPoint: .bottom /// End the gradient at the bottom.
         )
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.all)/// Extend the background to cover the entire screen.
     }
     
+    /// Determines the gradient colors based on the weather condition.
+    /// - Parameter condition: The weather condition as a string (e.g., "sunny", "cloudy").
+    /// - Returns: An array of colors for the gradient.
     func backgroundColors(for condition: String) -> [Color] {
         switch condition.lowercased() {
         case "sunny":

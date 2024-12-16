@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+/// A  SwiftUI view for displaying the current weather details./
 struct CurrentWeatherView: View {
     var temperature: String
     var condition: String
@@ -15,16 +16,20 @@ struct CurrentWeatherView: View {
     var humidity: String // Added parameter
     var windSpeed: String // Added parameter
     
+    /// The opacity state for animation effects.
     @State private var opacity = 0.0
 
     var body: some View {
         VStack(spacing: 16) {
+            
+            /// Display the location name.
             Text(location)
                 .font(.largeTitle)
                 .foregroundColor(.white)
-                .opacity(opacity)
-                .animation(.easeIn(duration: 1.0), value: opacity)
+                .opacity(opacity) /// Animate the opacity./
+                .animation(.easeIn(duration: 1.0), value: opacity)/// Smooth fade-in animation.
             
+            /// Display the weather icon if a valid URL is provided./
             if let iconURL = iconURL, let url = URL(string: iconURL) {
                 AsyncImage(url: url) { image in
                     image
@@ -42,7 +47,9 @@ struct CurrentWeatherView: View {
                 .foregroundColor(.white)
                 .opacity(opacity)
 
+            /// Display additional weather details in a horizontal layout./
             HStack {
+                /// Humidity Section/
                 VStack {
                     Text("Humidity")
                         .font(.subheadline)
@@ -53,6 +60,7 @@ struct CurrentWeatherView: View {
                 }
                 .padding()
 
+                /// Wind Speed Section/
                 VStack {
                     Text("Wind")
                         .font(.subheadline)
@@ -65,8 +73,9 @@ struct CurrentWeatherView: View {
             }
             .opacity(opacity)
         }
+        /// Trigger the fade-in animation on view appearance./
         .onAppear {
-            opacity = 1.0 // Trigger animation
+            opacity = 1.0 
         }
     }
 }

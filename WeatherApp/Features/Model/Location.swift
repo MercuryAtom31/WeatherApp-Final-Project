@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Represents a geographic location with a name and coordinates.
 struct Location: Codable {
     let name: String
     let latitude: Double

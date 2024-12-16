@@ -6,6 +6,7 @@
 import Foundation
 import Combine
 
+/// A view model for managing current weather and hourly forecast data.
 class WeatherViewModel: ObservableObject {
     @Published var currentWeather: Weather?
     @Published var hourlyForecast: [ForecastResponse.Forecast] = []
@@ -14,12 +15,14 @@ class WeatherViewModel: ObservableObject {
     private let weatherService = WeatherService()
     private var cancellables = Set<AnyCancellable>()
     
+    /// Computed property to generate the URL for the current weather icon.
     var iconURL: String? {
         guard let iconCode = currentWeather?.weather.first?.icon else { return nil }
         return "https://openweathermap.org/img/wn/\(iconCode)@2x.png"
     }
 
-
+    /// Fetches the current weather and hourly forecast for a specified city.
+    /// - Parameter city: The name of the city for which the weather data is fetched.
     func fetchWeatherData(for city: String) {
         weatherService.fetchCurrentWeather(for: city)
             .receive(on: DispatchQueue.main)
@@ -31,7 +34,7 @@ class WeatherViewModel: ObservableObject {
                 self.currentWeather = weather
             }
             .store(in: &cancellables)
-
+        /// Fetch hourly forecast./
         weatherService.fetchForecast(for: city)
             .receive(on: DispatchQueue.main)
             .sink { completion in
@@ -39,6 +42,7 @@ class WeatherViewModel: ObservableObject {
                     self.errorMessage = error.localizedDescription
                 }
             } receiveValue: { forecastResponse in
+                /// Update the hourly forecast data./
                 self.hourlyForecast = forecastResponse.list
             }
             .store(in: &cancellables)
