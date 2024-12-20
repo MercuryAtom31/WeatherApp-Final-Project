@@ -41,7 +41,7 @@
 
 ## Technologies Used
 - **Language**: Swift, SwiftUI
-- **API Integration**: Open-Meteo API
+- **API Integration**: OpenWeather API and Open-Meteo API
 - **Frameworks**: MapKit, SwiftUI
 - **Storage**: Local JSON Files (`local_weather.json`, `news_articles.json`)
 - **Tools**: Xcode 15, iOS Simulator
