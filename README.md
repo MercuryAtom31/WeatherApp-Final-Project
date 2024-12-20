@@ -117,6 +117,18 @@ WeatherApp/
 2. **iOS Simulator or Device**: Run the app on a simulator (iOS 18) or a physical iPhone device.
 
 ### Steps to Run
+
+***************************IMPORTANT***************************
+Inside the services folder, the `WeatherService` class is responsible for fetching weather data from the OpenWeather API.
+You must replace the placeholder value below with your actual API key.  
+You can obtain an API key by signing up at the [OpenWeather API website](https://openweathermap.org/).
+
+Example:
+```swift
+private let apiKey = "get_your_api_key_from_OpenWeather_API"
+```
+***************************IMPORTANT***************************
+
 1. Clone this repository to your local system:
    ```bash
    git clone https://github.com/yourusername/WeatherApp.git](https://github.com/MercuryAtom31/WeatherApp-Final-Project.git
