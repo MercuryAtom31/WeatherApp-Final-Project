@@ -203,7 +203,7 @@ Make sure to replace `YOUR_API_KEY` with a valid API key for OpenWeather API.
 
 ## Acknowledgments
 - [Open-Meteo API](https://open-meteo.com/)
-- OpenWeather API
+- [OpenWeather API](https://openweathermap.org)
 - [WeatherBug News](https://www.weatherbug.com/)
 - Built with ❤️ using SwiftUI and MapKit.
 
